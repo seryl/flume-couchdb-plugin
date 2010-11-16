@@ -11,9 +11,15 @@ run `ant`
 Setting up the Sink
 ----------------------------------------------
 
-couchdbSink( "logging.mydomain.com", 5984, "logs", "\\[({host}\\w+)\\] ({pool}\\w+): \\[.*?\\] \\[\\w+\\] \\[client ({client}.*?)\\] ({error}.*?): ({message}.*)", "message, host" )
+couchdbSink(
 
-This sets up a basic couchdb sink to drop logs off to the "logs" databse in couchdb, using the regex to setup hashes for the log message.
+  "logging.mydomain.com", 5984, "logs",
+
+  "\\[({host}\\w+)\\] ({pool}\\w+): \\[.*?\\] \\[\\w+\\] \\[client ({client}.*?)\\] ({error}.*?): ({message}.*)",
+
+  "message, host" )
+
+This sets up a basic couchdb sink to drop logs off to the "logs" databse in couchdb, using the regex to setup hashes for the log message. The last bit, "message, host", was originally for setting up indexes, and may be removed with the next commit.
 
 Turns your flat logs into hashed, usable logs!
 
