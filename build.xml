@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<project name="flume-couchdb-plugin" default="jar" >
+    <property name="javac.debug" value="on"/>
+    <property name="flume.home" value="../.."/>
+    <property name="jar.name" value="flume-couchdb-plugin.jar"/>
+
+    <path id="classpath">
+        <pathelement location="${flume.home}/build/classes"/>
+        <fileset dir="./lib">
+            <include name="jregex_custom.jar" />
+            <include name="commons-logging-1.1.1.jar" />
+            <include name="log4j-1.2.16.jar" />
+            <include name="slf4j-api-1.6.1.jar" />
+            <include name="slf4j-nop-1.6.1.jar" />
+            <include name="httpcore-4.0.1.jar" />
+            <include name="httpclient-4.0.3.jar" />
+            <include name="jackson-core-asl-1.6.0.jar" />
+            <include name="jackson-mapper-asl-1.6.0.jar" />
+            <include name="org.ektorp-1.0.1.jar" />
+        </fileset>
+
+        <fileset dir="${flume.home}">
+            <include name="flume-*.jar" />
+        </fileset>
+    </path>
+
+    <target name="jar">
+        <mkdir dir="build"/>
+        <mkdir dir="build/classes"/>
+
+        <javac srcdir="./src" destdir="build/classes" debug="${javac.debug}" includeAntRuntime="no">
+            <classpath refid="classpath"/>
+        </javac>
+
+        <jar jarfile="${jar.name}" basedir="build/classes"/>
+    </target>
+
+    <target name="clean">
+        <echo message="Cleaning generated files and stuff"/>
+        <delete dir="build" />
+        <delete file="${jar.name}" />
+    </target>
+</project>
